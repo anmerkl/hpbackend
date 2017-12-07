@@ -1,27 +1,10 @@
 class SystemsController < ApplicationController
-  before_action :filter_systems, only: [:search, :filter]
-
-  def search
-  end
-
-  def filter
-  end
 
   def all
     @systems = System.where(companyName: params[:companyName]).to_json
   end
-
-  def create
-    System.create_from_csv(params[:csv])
-  end
-
-  def update
-    System.update_from_csv(params[:csv])
-  end
-
-  private
-
-  def filter_systems
+  
+  def search
     filtered_systems = System.where(companyName: params[:companyName])
     if params[:systemName]
       filtered_systems = filtered_systems.where(systemName: params[:systemName])
@@ -47,6 +30,15 @@ class SystemsController < ApplicationController
     if params[:location_country]
       filtered_systems = filtered_systems.where(location_country: params[:location_country])
     end
+
     @systems = filtered_systems.to_json
+  end
+
+  def create
+    System.create_from_csv(params[:csv])
+  end
+
+  def update
+    System.update_from_csv(params[:csv])
   end
 end

@@ -11,7 +11,8 @@ class System < ApplicationRecord
 
   def self.update_from_csv(csv)
     CSV.foreach(csv, headers: true) do |row|
-      System.update(row.to_h)
+      s = System.where(serialNumber: row.fetch("serialNumber"))
+      s.update(row.to_h)
     end
   end
 end
