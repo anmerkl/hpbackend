@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/systems/:companyName/search', to: 'systems#search'
+  get '/systems/:companyName/filter', to: 'systems#filter'
+  get '/systems/:companyName/all', to: 'systems#all'
+  get '/systems/:companyName/create/:file', to: 'systems#create'
+  get '/systems/:companyName/update/:file', to: 'systems#update'
 end
