@@ -1,7 +1,7 @@
 class SystemsController < ApplicationController
 
   def all
-    @systems = System.where(companyName: params[:companyName]).to_json
+    render json: System.where(companyName: params[:companyName])
   end
 
   def search
@@ -31,7 +31,7 @@ class SystemsController < ApplicationController
       filtered_systems = filtered_systems.where(location_country: params[:location_country])
     end
 
-    @systems = filtered_systems.to_json
+    render json: filtered_systems
   end
 
   def update
