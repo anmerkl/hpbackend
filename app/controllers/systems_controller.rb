@@ -1,7 +1,11 @@
 class SystemsController < ApplicationController
 
   def all
-    render json: System.where(companyName: params[:companyName])
+    if params[:companyName] == 'HP Admin'
+      render json: System.all
+    else
+      render json: System.where(companyName: params[:companyName])
+    end
   end
 
   def search
